@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>週記 0922 | sheng&#39;s blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="為了跟 nvim 培養感情，我想多寫點東西。
+話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。
+m68k
+最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。
+不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。
+所以我打算先從幫忙 review PR 開始。
+跑步
+昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。
+手機
+9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。
+主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。
+到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。
+像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。
+我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。
+這感覺還可以多談一些，不過先等我把手機拿回來吧。
+模型
+最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。
+田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。
+話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。
+學業
+虛擬機器加簽上了，可喜可賀。
+第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。
+其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。
+相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。
+然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。">
+<meta name="author" content="">
+<link rel="canonical" href="https://0x59616e.github.io/post/weekly_0922/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://0x59616e.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://0x59616e.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://0x59616e.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://0x59616e.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://0x59616e.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://0x59616e.github.io/post/weekly_0922/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="週記 0922" />
+<meta property="og:description" content="為了跟 nvim 培養感情，我想多寫點東西。
+話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。
+m68k
+最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。
+不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。
+所以我打算先從幫忙 review PR 開始。
+跑步
+昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。
+手機
+9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。
+主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。
+到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。
+像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。
+我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。
+這感覺還可以多談一些，不過先等我把手機拿回來吧。
+模型
+最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。
+田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。
+話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。
+學業
+虛擬機器加簽上了，可喜可賀。
+第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。
+其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。
+相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。
+然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x59616e.github.io/post/weekly_0922/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-09-29T19:17:52+08:00" />
+<meta property="article:modified_time" content="2024-09-29T19:17:52+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="週記 0922"/>
+<meta name="twitter:description" content="為了跟 nvim 培養感情，我想多寫點東西。
+話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。
+m68k
+最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。
+不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。
+所以我打算先從幫忙 review PR 開始。
+跑步
+昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。
+手機
+9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。
+主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。
+到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。
+像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。
+我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。
+這感覺還可以多談一些，不過先等我把手機拿回來吧。
+模型
+最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。
+田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。
+話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。
+學業
+虛擬機器加簽上了，可喜可賀。
+第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。
+其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。
+相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。
+然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://0x59616e.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "週記 0922",
+      "item": "https://0x59616e.github.io/post/weekly_0922/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "週記 0922",
+  "name": "週記 0922",
+  "description": "為了跟 nvim 培養感情，我想多寫點東西。\n話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。\nm68k 最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。\n不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。\n所以我打算先從幫忙 review PR 開始。\n跑步 昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。\n手機 9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。\n主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。\n到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。\n像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。\n我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。\n這感覺還可以多談一些，不過先等我把手機拿回來吧。\n模型 最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。\n田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。\n話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。\n學業 虛擬機器加簽上了，可喜可賀。\n第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。\n其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。\n相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。\n然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "為了跟 nvim 培養感情，我想多寫點東西。\n話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。\nm68k 最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。\n不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。\n所以我打算先從幫忙 review PR 開始。\n跑步 昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。\n手機 9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。\n主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。\n到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。\n像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。\n我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。\n這感覺還可以多談一些，不過先等我把手機拿回來吧。\n模型 最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。\n田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。\n話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。\n學業 虛擬機器加簽上了，可喜可賀。\n第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。\n其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。\n相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。\n然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。\n",
+  "wordCount" : "62",
+  "inLanguage": "en",
+  "datePublished": "2024-09-29T19:17:52+08:00",
+  "dateModified": "2024-09-29T19:17:52+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://0x59616e.github.io/post/weekly_0922/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "sheng's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://0x59616e.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://0x59616e.github.io/" accesskey="h" title="sheng&#39;s blog (Alt + H)">sheng&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://0x59616e.github.io/about/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      週記 0922
+    </h1>
+    <div class="post-meta"><span title='2024-09-29 19:17:52 +0800 CST'>September 29, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>為了跟 nvim 培養感情，我想多寫點東西。</p>
+<p>話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。</p>
+<h2 id="m68k">m68k<a hidden class="anchor" aria-hidden="true" href="#m68k">#</a></h2>
+<p>最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。</p>
+<p>不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。</p>
+<p>所以我打算先從幫忙 review PR 開始。</p>
+<h2 id="跑步">跑步<a hidden class="anchor" aria-hidden="true" href="#跑步">#</a></h2>
+<p>昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。</p>
+<h2 id="手機">手機<a hidden class="anchor" aria-hidden="true" href="#手機">#</a></h2>
+<p>9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。</p>
+<p>主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。</p>
+<p>到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。</p>
+<p>像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。</p>
+<p>我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。</p>
+<p>這感覺還可以多談一些，不過先等我把手機拿回來吧。</p>
+<h2 id="模型">模型<a hidden class="anchor" aria-hidden="true" href="#模型">#</a></h2>
+<p>最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。</p>
+<p>田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。</p>
+<p>話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。</p>
+<h2 id="學業">學業<a hidden class="anchor" aria-hidden="true" href="#學業">#</a></h2>
+<p>虛擬機器加簽上了，可喜可賀。</p>
+<p>第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。</p>
+<p>其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。</p>
+<p>相較之下，量子設計自動化特論就蠻折騰人了。這門課感覺比較偏向介紹性質吧，畢竟量子電腦這個領域很新，也不斷在進化中，也因此可能比較難規劃出有架構的課程，上了四個禮拜感覺還是學不太到什麼東西。</p>
+<p>然後德田館通風是不是很差阿，上課很難不昏昏欲睡，真的很折磨人。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://0x59616e.github.io/">sheng&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
