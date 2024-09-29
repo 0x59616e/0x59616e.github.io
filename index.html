@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://0x59616e.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a2e4bafca86eaeeccfb6eb2466e31aea957c3d511eadc2d89003e012ce37d70.css" integrity="sha256-ei5Lr8qG6u7M&#43;26yRm4xrqlXw9UR6twtiQA&#43;ASzjfXA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://0x59616e.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://0x59616e.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://0x59616e.github.io/favicon-32x32.png">
@@ -132,6 +132,69 @@
 <main class="main"> 
 
 <article class="first-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">新幹線
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>九州新幹線，從博多到鹿兒島，全長 256 公里。
+2011 年 3 月 12 日開業當日，因為東日本大地震的關係，沒有熱鬧的通車儀式，沒有慶祝的心情，首班車就這樣默默駛出月台。
+2016 年 ４ 月 16 日，熊本大地震，258 人罹難；熊本城至今仍未修復完成。
+仍未修復的熊本城一隅，2023/11/28 2021 年，九州新幹線開業 10 週年，疫情籠罩全日本，通車 10 週年的慶祝看起來要告吹了；多災多難的九州，命運多舛的九州新幹線
+但九州人沒有喪志，他們成功地舉辦了一場盛會，拍出了一支我不管什麼時候看，都還是很感動的通車 10 週年紀念影片。
+一個一個的願望，化身成流星，向著誰去呢？
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-04 17:02:56 +0800 CST'>October 4, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to 新幹線" href="https://0x59616e.github.io/post/shinkansen/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Review of llvm pull request 106715
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.
+What is this pull request trying to address? It is addressing two issues in the llvm m68k backend:
+Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes. See #106209 This pull request seems to address two problems. Should it be split into two? The second issue seems to be minor, so I think it is not a big deal.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-03 14:43:58 +0800 CST'>October 3, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to Review of llvm pull request 106715" href="https://0x59616e.github.io/post/llvm_pr_106715_review/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">週記 0922
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>為了跟 nvim 培養感情，我想多寫點東西。
+話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。
+m68k 最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。
+不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。
+所以我打算先從幫忙 review PR 開始。
+跑步 昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。
+手機 9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。
+主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。
+到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。
+像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。
+我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。
+這感覺還可以多談一些，不過先等我把手機拿回來吧。
+模型 最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。
+田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。
+話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。
+學業 虛擬機器加簽上了，可喜可賀。
+第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。
+其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-29 19:17:52 +0800 CST'>September 29, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to 週記 0922" href="https://0x59616e.github.io/post/weekly_0922/"></a>
+</article>
+
+<article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">意義
     </h2>

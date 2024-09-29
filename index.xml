@@ -6,8 +6,100 @@
     <description>Recent content on sheng&#39;s blog</description>
     <generator>Hugo -- 0.134.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Sep 2024 00:54:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 04 Oct 2024 17:02:56 +0800</lastBuildDate>
     <atom:link href="https://0x59616e.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>新幹線</title>
+      <link>https://0x59616e.github.io/post/shinkansen/</link>
+      <pubDate>Fri, 04 Oct 2024 17:02:56 +0800</pubDate>
+      <guid>https://0x59616e.github.io/post/shinkansen/</guid>
+      <description>&lt;p&gt;九州新幹線，從博多到鹿兒島，全長 256 公里。&lt;/p&gt;
+&lt;p&gt;2011 年 3 月 12 日開業當日，因為東日本大地震的關係，沒有熱鬧的通車儀式，沒有慶祝的心情，首班車就這樣默默駛出月台。&lt;/p&gt;
+&lt;p&gt;2016 年 ４ 月 16 日，熊本大地震，258 人罹難；熊本城至今仍未修復完成。&lt;/p&gt;
+
+&lt;figure class=&#34;text-center&#34;&gt;
+  &lt;img src=&#34;https://0x59616e.github.io/images/kumamotojou.jpg&#34; alt=&#34;熊本城&#34; class=&#34;mx-auto&#34;&gt;
+  &lt;figcaption class=&#34;normal-font gray-text&#34;&gt;仍未修復的熊本城一隅，2023/11/28&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;style&gt;
+.text-center {
+  text-align: center;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.normal-font {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1.5;
+  margin-top: 0.5em;
+}
+.gray-text {
+  color: #999;
+}
+&lt;/style&gt;
+
+
+&lt;p&gt;2021 年，九州新幹線開業 10 週年，疫情籠罩全日本，通車 10 週年的慶祝看起來要告吹了；多災多難的九州，命運多舛的九州新幹線&lt;/p&gt;
+&lt;p&gt;但九州人沒有喪志，他們成功地舉辦了一場盛會，拍出了一支我不管什麼時候看，都還是很感動的通車 10 週年紀念影片。&lt;/p&gt;
+
+
+    
+    &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/2002jGlh7yU?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;
+      &gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;p&gt;一個一個的願望，化身成流星，向著誰去呢？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Review of llvm pull request 106715</title>
+      <link>https://0x59616e.github.io/post/llvm_pr_106715_review/</link>
+      <pubDate>Thu, 03 Oct 2024 14:43:58 +0800</pubDate>
+      <guid>https://0x59616e.github.io/post/llvm_pr_106715_review/</guid>
+      <description>&lt;p&gt;I want to document my thought process while reviewing &lt;a href=&#34;https://github.com/llvm/llvm-project/pull/106715&#34;&gt;the pull request&lt;/a&gt; of llvm to clarify and organize my ideas.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-this-pull-request-trying-to-address&#34;&gt;What is this pull request trying to address?&lt;/h2&gt;
+&lt;p&gt;It is addressing two issues in the llvm m68k backend:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See &lt;a href=&#34;https://github.com/llvm/llvm-project/issues/106206&#34;&gt;#106206&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes. See &lt;a href=&#34;https://github.com/llvm/llvm-project/issues/106209&#34;&gt;#106209&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;this-pull-request-seems-to-address-two-problems-should-it-be-split-into-two&#34;&gt;This pull request seems to address two problems. Should it be split into two?&lt;/h2&gt;
+&lt;p&gt;The second issue seems to be minor, so I think it is not a big deal.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>週記 0922</title>
+      <link>https://0x59616e.github.io/post/weekly_0922/</link>
+      <pubDate>Sun, 29 Sep 2024 19:17:52 +0800</pubDate>
+      <guid>https://0x59616e.github.io/post/weekly_0922/</guid>
+      <description>&lt;p&gt;為了跟 nvim 培養感情，我想多寫點東西。&lt;/p&gt;
+&lt;p&gt;話雖如此，最近也沒什麼 code 可以寫，所以只好寫寫廢文。&lt;/p&gt;
+&lt;h2 id=&#34;m68k&#34;&gt;m68k&lt;/h2&gt;
+&lt;p&gt;最近剛開學，而且又是碩一，閒得很，想回去弄 llvm m68k backend。&lt;/p&gt;
+&lt;p&gt;不過，這個後端現在只有一個人在維護，而且對方工作可能不輕鬆，很多 PR 懸在那裡都沒人 review。&lt;/p&gt;
+&lt;p&gt;所以我打算先從幫忙 review PR 開始。&lt;/p&gt;
+&lt;h2 id=&#34;跑步&#34;&gt;跑步&lt;/h2&gt;
+&lt;p&gt;昨天 5K 終於跑進 26 分了，可喜可賀，要是哪天能跑進 20 分就更好了。&lt;/p&gt;
+&lt;h2 id=&#34;手機&#34;&gt;手機&lt;/h2&gt;
+&lt;p&gt;9/25 去辦離職，回程很厚臉皮地請主管載我回台大，結果就把手機忘在車上惹。&lt;/p&gt;
+&lt;p&gt;主管住新竹，下次上來台北是 10/3 號，我至少一個禮拜沒手機用。&lt;/p&gt;
+&lt;p&gt;到今天為止已經是第 4 天了，生活是有些不方便，但也還能過，但這種日子不太可能持續下去，生活中有太多部份都跟手機綁定在一起了。&lt;/p&gt;
+&lt;p&gt;像是登入 github 需要用手機驗證、買演唱會門票需要用手機認證。&lt;/p&gt;
+&lt;p&gt;我甚至差點衝動下訂一台新手機了，結果網路刷卡也需要用手機驗證。&lt;/p&gt;
+&lt;p&gt;這感覺還可以多談一些，不過先等我把手機拿回來吧。&lt;/p&gt;
+&lt;h2 id=&#34;模型&#34;&gt;模型&lt;/h2&gt;
+&lt;p&gt;最近正在做 TAMIYA 1/24 RZ34，這台的分件做得非常好，像是煞車卡鉗跟煞車碟盤，以往是合在一起的，現在是分開的，上色方便許多；座椅的分件也有注意到上色的方便性，整體來講是很不錯的模型。&lt;/p&gt;
+&lt;p&gt;田宮讓我喜歡的地方就在這裡，他們總是能找出可以改善的小地方，讓模型製作變得更加愉快。&lt;/p&gt;
+&lt;p&gt;話說他們年底要一次出 911 GT3 RS 和 1/48 F-35C，荷包要大失血了。&lt;/p&gt;
+&lt;h2 id=&#34;學業&#34;&gt;學業&lt;/h2&gt;
+&lt;p&gt;虛擬機器加簽上了，可喜可賀。&lt;/p&gt;
+&lt;p&gt;第一份作業是架環境和改一點 kvm，第一次動手改 linux，很新鮮。這門課是第一次讓我有「能來到這裡真是太好了」的念頭的課。&lt;/p&gt;
+&lt;p&gt;其它還有英文寫作基礎，雖然只是修來湊學分，但老師上課口條很好，而且共同教學館採光很好，風景明媚，上得很愉快。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>意義</title>
       <link>https://0x59616e.github.io/post/meaning/</link>
