@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Review of llvm pull request 106715 | sheng&#39;s blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.
+What is this pull request trying to address? It is addressing two issues in the llvm m68k backend:
+Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes.">
+<meta name="author" content="">
+<link rel="canonical" href="https://0x59616e.github.io/post/llvm_pr_106715_review/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7a2e4bafca86eaeeccfb6eb2466e31aea957c3d511eadc2d89003e012ce37d70.css" integrity="sha256-ei5Lr8qG6u7M&#43;26yRm4xrqlXw9UR6twtiQA&#43;ASzjfXA=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://0x59616e.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://0x59616e.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://0x59616e.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://0x59616e.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://0x59616e.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://0x59616e.github.io/post/llvm_pr_106715_review/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+  
+
+<meta property="og:title" content="Review of llvm pull request 106715" />
+<meta property="og:description" content="I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.
+What is this pull request trying to address? It is addressing two issues in the llvm m68k backend:
+Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x59616e.github.io/post/llvm_pr_106715_review/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-10-03T14:43:58+08:00" />
+<meta property="article:modified_time" content="2024-10-03T14:43:58+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Review of llvm pull request 106715"/>
+<meta name="twitter:description" content="I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.
+What is this pull request trying to address? It is addressing two issues in the llvm m68k backend:
+Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://0x59616e.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Review of llvm pull request 106715",
+      "item": "https://0x59616e.github.io/post/llvm_pr_106715_review/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Review of llvm pull request 106715",
+  "name": "Review of llvm pull request 106715",
+  "description": "I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.\nWhat is this pull request trying to address? It is addressing two issues in the llvm m68k backend:\nBreaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes.",
+  "keywords": [
+    
+  ],
+  "articleBody": "I want to document my thought process while reviewing the pull request of llvm to clarify and organize my ideas.\nWhat is this pull request trying to address? It is addressing two issues in the llvm m68k backend:\nBreaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See #106206 Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes. See #106209 This pull request seems to address two problems. Should it be split into two? The second issue seems to be minor, so I think it is not a big deal.\nDoes this approach accurately target the problem? We have to solutions:\nAdding a glue between the compare and branch operations to prevent the use-def chain of ccr from being broken. Using a instruction that does not affect the ccr. The deciding factor lies at this problem: Should the compare and branch operations be glued together?\nIf yes, then we should choose the first one; otherwise the second one.\nMy answer is: no. But I cannot provide a strong argument. Just intuition.\nAnd the author choose the second solution, which I think is appropriate.\nWhat is the side effect of this solution? It consumes more stack space, because the instruction the author choose cannot store 1 byte data, so every 1 byte data has to be promoted to 2 byte. I’m not sure whether this is a problem. I guess not.\nDoes his test target the issues accurately? It appears not. I cannot determine if the test is specifically targeting the issues being addressed.\nI cannot see whether the instruction modified in this PR is a spill instruction, nor can I see what size of the stack slot is.\n",
+  "wordCount" : "306",
+  "inLanguage": "en",
+  "datePublished": "2024-10-03T14:43:58+08:00",
+  "dateModified": "2024-10-03T14:43:58+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://0x59616e.github.io/post/llvm_pr_106715_review/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "sheng's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://0x59616e.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://0x59616e.github.io/" accesskey="h" title="sheng&#39;s blog (Alt + H)">sheng&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://0x59616e.github.io/about/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Review of llvm pull request 106715
+    </h1>
+    <div class="post-meta"><span title='2024-10-03 14:43:58 +0800 CST'>October 3, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>I want to document my thought process while reviewing <a href="https://github.com/llvm/llvm-project/pull/106715">the pull request</a> of llvm to clarify and organize my ideas.</p>
+<h2 id="what-is-this-pull-request-trying-to-address">What is this pull request trying to address?<a hidden class="anchor" aria-hidden="true" href="#what-is-this-pull-request-trying-to-address">#</a></h2>
+<p>It is addressing two issues in the llvm m68k backend:</p>
+<ol>
+<li>Breaking of the use-def chain of the control code register (ccr) between compare and branch operations due to spill instructions inserted by the register allocator. See <a href="https://github.com/llvm/llvm-project/issues/106206">#106206</a></li>
+<li>Unmatched size between the stack slot and the data due to unconditional promotion of the 1 byte spill to 4 bytes. See <a href="https://github.com/llvm/llvm-project/issues/106209">#106209</a></li>
+</ol>
+<h2 id="this-pull-request-seems-to-address-two-problems-should-it-be-split-into-two">This pull request seems to address two problems. Should it be split into two?<a hidden class="anchor" aria-hidden="true" href="#this-pull-request-seems-to-address-two-problems-should-it-be-split-into-two">#</a></h2>
+<p>The second issue seems to be minor, so I think it is not a big deal.</p>
+<h2 id="does-this-approach-accurately-target-the-problem">Does this approach accurately target the problem?<a hidden class="anchor" aria-hidden="true" href="#does-this-approach-accurately-target-the-problem">#</a></h2>
+<p>We have to solutions:</p>
+<ol>
+<li>Adding a glue between the compare and branch operations to prevent the use-def chain of ccr from being broken.</li>
+<li>Using a instruction that does not affect the ccr.</li>
+</ol>
+<p>The deciding factor lies at this problem: Should the compare and branch operations be glued together?</p>
+<p>If yes, then we should choose the first one; otherwise the second one.</p>
+<p>My answer is: no. But I cannot provide a strong argument. Just intuition.</p>
+<p>And the author choose the second solution, which I think is appropriate.</p>
+<h2 id="what-is-the-side-effect-of-this-solution">What is the side effect of this solution?<a hidden class="anchor" aria-hidden="true" href="#what-is-the-side-effect-of-this-solution">#</a></h2>
+<p>It consumes more stack space, because the instruction the author choose cannot store 1 byte data, so every 1 byte data has to be promoted to 2 byte. I&rsquo;m not sure whether this is a problem. I guess not.</p>
+<h2 id="does-his-test-target-the-issues-accurately">Does his test target the issues accurately?<a hidden class="anchor" aria-hidden="true" href="#does-his-test-target-the-issues-accurately">#</a></h2>
+<p>It appears not. I cannot determine if the test is specifically targeting the issues being addressed.</p>
+<p>I cannot see whether the instruction modified in this PR is a spill instruction, nor can I see what size of the stack slot is.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://0x59616e.github.io/">sheng&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
